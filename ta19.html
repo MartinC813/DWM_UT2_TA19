@@ -1,0 +1,77 @@
+<!DOCTYPE html><html>
+    <head>
+    </head>
+    <body>
+        <form>
+            <label for="name">Nombre:</label>
+            <input id="nameInput" type="text"/>
+            <span id="errorNombre" style="color: red; display: inline;">Este campo no puede estar vacio</span>
+            <br><br>
+
+            <label for="password">Contraseña:</label>
+            <input id="passwordInput" type="text"/>
+            <span id="errorContraseña" style="color: red; display: inline;">La contraseña debe tener al menos 8 caracteres</span>
+            <br><br>
+
+            <label for="email">Correo electronico</label>
+            <input id="emailInput" type="text"/>
+            <span id="errorEmail" style="color: red; display: inline;">Correo electronico invalido</span>
+            <br><br>
+
+            <input type="submit" value="Send" id="enviar"/>
+        </form>
+        <script>
+            const nombre = document.getElementById("nameInput");
+            const contraseña = document.getElementById("passwordInput");
+            const email = document.getElementById("emailInput");
+
+            nombre.addEventListener("input", () =>{
+                const valor = nombre.value.trim();
+                if(valor === ""){
+                const vacioError = document.getElementById("errorNombre");
+                vacioError.style.display = "inline";
+                }
+                else{
+                    const vacioError = document.getElementById("errorNombre");
+                    vacioError.style.display = "none";
+                }
+            });
+
+            contraseña.addEventListener("input", () =>{
+                const valorContraseña = contraseña.value.trim();
+                if(valorContraseña.length < 8){
+                    const contraseñaError = document.getElementById("errorContraseña");
+                    contraseñaError.style.display = "inline";
+                }
+                else{
+                    const vacioError = document.getElementById("errorContraseña");
+                    vacioError.style.display = "none";
+                }
+            });
+
+            email.addEventListener("input", () =>{
+                const valor = email.value.trim();
+                if(valor.includes("@gmail.com") || valor.includes("@hotmail.com")){
+                    const emailError = document.getElementById("errorEmail");
+                    emailError.style.display = "none";
+                }
+                else{
+                    const emailError = document.getElementById("errorEmail");
+                    emailError.style.display = "inline";
+                }
+            });
+
+            const enviado = document.getElementById("enviar");
+            enviado.addEventListener("click", () =>{
+                const emailError = document.getElementById("errorEmail");
+                const contraseñaError = document.getElementById("errorContraseña");
+                const vacioError = document.getElementById("errorNombre");
+
+                if(emailError.style.display === "inline" || contraseñaError.style.display === "inline" || vacioError.style.display === "inline"){
+                    event.preventDefault();
+                }
+            });
+            
+        </script>
+    </body>
+</html>
